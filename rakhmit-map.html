@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>منطقة رخميت على الخريطة</title>
+    <meta charset="utf-8" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGzN9JyovaoCml8R44Vsz-OUsNTD6f8s4"></script>
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 13,
+          center: { lat: 15.065, lng: 50.585 },
+        });
+
+        const polygonCoords = [
+          { lat: 15.055783767782515, lng: 50.61053109220771 },
+          { lat: 15.078052102538663, lng: 50.601413909431415 },
+          { lat: 15.08323045101352, lng: 50.585056610921725 },
+          { lat: 15.079087782322404, lng: 50.566017788066205 },
+          { lat: 15.065623551823336, lng: 50.556096147986835 },
+          { lat: 15.052417421503122, lng: 50.555023538248264 },
+          { lat: 15.043871842081302, lng: 50.56119104424428 },
+          { lat: 15.055783767782515, lng: 50.61053109220771 }
+        ];
+
+        const areaPolygon = new google.maps.Polygon({
+          paths: polygonCoords,
+          strokeColor: "#FF0000",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "#FF0000",
+          fillOpacity: 0.35,
+        });
+
+        areaPolygon.setMap(map);
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `
+            <div style="font-family: Arial; font-size: 14px;">
+              <strong>منطقة رخميت</strong><br>
+              <p style="margin: 5px 0;">
+                تقع رخميت في عزلة الريدة وقصيعر بمديرية الريدة وقصيعر التابعة لمحافظة حضرموت في اليمن.
+                بلغ عدد سكانها 475 نسمة حسب تعداد عام 2004، موزعين على 71 أسرة و98 مسكنًا.
+              </p>
+              <a href="https://ar.wikipedia.org/wiki/رخميت_(الريدة)" target="_blank">المزيد على ويكيبيديا</a>
+            </div>
+          `,
+          position: { lat: 15.065, lng: 50.585 }
+        });
+
+        areaPolygon.addListener("click", (event) => {
+          infoWindow.setPosition(event.latLng);
+          infoWindow.open(map);
+        });
+      }
+    </script>
+  </head>
+  <body onload="initMap()">
+    <div id="map" style="height: 600px; width: 100%;"></div>
+  </body>
+</html>
